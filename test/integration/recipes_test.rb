@@ -3,20 +3,23 @@ require 'test_helper'
 class RecipesTest < ActionDispatch::IntegrationTest
   
   def setup
-    @chef = Chef.create!(chefname: "john", email: "john@example.com")
+    @chef = Chef.create!(chefname: "john", email: "john@example.com",  password: "password", password_confirmation: "password")
     @recipe = Recipe.create(name: "First", description: "First Recipe", chef: @chef)
     @recipe2 = Recipe.create(name: "Second", description: "Second Recipe", chef: @chef)
   end
+  
   test "should get recipes index" do
     get recipes_url
     assert_response :success 
   end
+  
   test "should get recipes listing" do
     get recipes_path
     assert_template "recipes/index"
     assert_select "a[href=?]", recipe_path(@recipe), text: @recipe.name
     assert_select "a[href=?]", recipe_path(@recipe2), text: @recipe2.name    
   end
+  
   test "should get recipes show" do
     get recipe_path(@recipe)
     assert_template "recipes/show"
