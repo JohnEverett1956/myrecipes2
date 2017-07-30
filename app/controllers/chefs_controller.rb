@@ -1,6 +1,13 @@
 class ChefsController < ApplicationController
   
-  before_action :set_chef, only: [:show, :edit, :update] 
+  before_action :set_chef, only: [:show, :edit, :update, :destroy] 
+  
+  def destroy
+    @chef.delete
+    flash[:success] = "Chef and all affiliated recipes have been deleted"   
+    redirect_to chefs_path
+    
+  end
   
   def index
     @chefs = Chef.paginate(page: params[:page], per_page: 3)
