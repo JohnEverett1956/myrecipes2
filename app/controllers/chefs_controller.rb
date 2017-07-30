@@ -2,6 +2,10 @@ class ChefsController < ApplicationController
   
   before_action :set_chef, only: [:show, :edit, :update] 
   
+  def index
+    @chefs = Chef.paginate(page: params[:page], per_page: 3)
+  end
+  
   def new
    @chef = Chef.new; 
   end
@@ -36,6 +40,7 @@ class ChefsController < ApplicationController
   private
   def set_chef
     @chef = Chef.find(params[:id]) 
+    @chef_recipes = @chef.recipes.paginate(page: params[:page], per_page: 2)
   end  
   def chef_params
     params.require(:chef).permit(:chefname, :email, :password, :password_confirmation)
