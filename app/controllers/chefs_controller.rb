@@ -8,15 +8,16 @@ class ChefsController < ApplicationController
     @chef = Chef.new(chef_params)
     if @chef.save 
        flash[:success] = "Welcome #{@chef.chefname.capitalize} to MyRecipes App!"
-       redirect_to chefs_path(@chef)     
+       redirect_to chef_path(@chef)     
     else
       render "new"
     end
   end
   
   def show 
-    
+    @chef = Chef.find(params[:id])
   end
+  
   private
   def chef_params
     params.require(:chef).permit(:chefname, :email, :password, :password_confirmation)
