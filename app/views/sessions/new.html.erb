@@ -1,0 +1,28 @@
+<%= render "shared/page_title", title: "Log in" %>
+
+<%= form_for(:session, :hmtl => {roles: "form", class: "form-horizontal"}, url: login_path) do |f| %> 
+  <div class="form-group col-md-12">
+    <div class="col-md-2 control-label">
+      <%= f.label :email %>
+    </div>
+    <div class="col-md-10">
+      <%= f.email_field :email, class: "form-control", placeholder: "Enter your email" %>
+    </div>
+  </div>
+  <div class="form-group col-md-12">
+    <div class="col-md-2 control-label">
+      <%= f.label :password %>
+    </div>
+    <div class="col-md-10">
+      <%= f.password_field :password, class: "form-control", placeholder: "Enter your password" %>
+    </div>
+  </div>      
+  <div class="form-group col-md-12">
+    <div class="col-md-offset-2 col-md-10">
+      <%= f.submit("Log in", class: "btn btn-primary btn-lg btn-xlarge") %>
+    </div>
+  </div>
+<% end %>
+<div class="center">
+  [ <%= link_to "Don't have an account? Sign up now!", signup_path  %> ]
+</div>
