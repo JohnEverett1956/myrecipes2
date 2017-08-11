@@ -1,7 +1,7 @@
 <%= render "shared/errors", obj: @recipe %>
 <div class="row">
   <div class="col-md-12">
-    <%= form_for(@recipe, :hmtl => {roles: "form", class: "form-horizontal"}) do |f| %> 
+    <%= form_for(@recipe, :hmtl => {role: "form", class: "form-horizontal",  multipart: true }) do |f| %> 
       <div class="form-group col-md-12">
         <div class="col-md-2 control-label">
           <%= f.label :name %>
@@ -25,6 +25,14 @@
               <% cb.label(class: "checkbox-inline input_checkbox") {cb.check_box(class: "checkbox") + cb.text} %>
             <% end %>
           </div>
+        </div>
+      </div> 
+      <div class="form-group">
+        <div class="control-label col-md-2">
+          <%= f.label :image, "Add Image" %>
+        </div>
+        <div class="col-md-8">
+          <%= f.file_field :image, accept: 'image/jpeg,image/gif,image/png' %>
         </div>
       </div>      
       <div class="form-group col-md-12">
